@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:kurs/screens/map_screen.dart';
+import 'package:kurs/screens/screens_places_churches/place_screen_sobor1.dart';
+import 'package:kurs/screens/screens_places_churches/place_screen_sobor2.dart';
+import 'package:kurs/screens/screens_places_churches/place_screen_sobor3.dart';
 import '../models/destination_model.dart';
 import '../models/place_model.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
 
 class DestinationScreenChurches extends StatefulWidget{
@@ -60,11 +62,26 @@ class _DestinationScreenChurchesState extends State<DestinationScreenChurches> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      iconSize: 30.0,
-                      color: Colors.black,
-                      onPressed: () => Navigator.pop(context),
+                    InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 6,
+                                ),
+                              ]
+                          ),
+                          child: Icon(Icons.arrow_back,
+                            size: 28,
+                          ),
+                        )
                     ),
                   ],
                 ),
@@ -116,9 +133,9 @@ class _DestinationScreenChurchesState extends State<DestinationScreenChurches> {
                 Place place = placesC[index];//widget.destination.placesC[index];
                 return GestureDetector(
                     onTap: () => {
-                      if (placesC[index].name == 'Собор Александра Невского')  Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenSobor1(cafe: cafe),),)
-                      //else if (placesC[index].name == 'Свято-Георгиевский храм') Navigator.push(context,MaterialPageRoute(builder: (_) => CafeScreenCafes(cafe: cafe),),)
-                      //else if (placesC[index].name == 'Свято-Троицкий собор') Navigator.push(context,MaterialPageRoute(builder: (_) => CafeScreenBars(cafe: cafe),),)
+                      if (placesC[index].name == 'Собор Александра Невского')  Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenSobor1(),),)
+                      else if (placesC[index].name == 'Свято-Георгиевский храм') Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenSobor2(),),)
+                      else if (placesC[index].name == 'Свято-Троицкий собор') Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenSobor3(),),)
                     },
                 child: Stack(
                   children: <Widget>[
@@ -149,14 +166,6 @@ class _DestinationScreenChurchesState extends State<DestinationScreenChurches> {
                                         maxLines: 2,
                                       ),
                                     ),
-                                   Container(
-                                     child:IconButton(
-                                      icon: Icon(Icons.location_on),
-                                      //color: Colors.black,
-                                     iconSize: 25.0,
-                                     onPressed:() => {Navigator.push(context,MaterialPageRoute(builder: (_) => MapScreen()),),},
-                                   )
-                                   ),
                                   ]
                               ),
                               Text(place.address,

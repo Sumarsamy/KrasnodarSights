@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/src/widgets/container.dart';
+import 'package:kurs/screens/screens_eatplaces_bars/screen_eatplace_bar1.dart';
+import 'package:kurs/screens/screens_eatplaces_bars/screen_eatplace_bar2.dart';
+import 'package:kurs/screens/screens_eatplaces_bars/screen_eatplace_bar3.dart';
 import '../models/cafe_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
@@ -60,11 +63,26 @@ class _CafeScreenBarsState extends State<CafeScreenBars> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      iconSize: 30.0,
-                      color: Colors.black,
-                      onPressed: () => Navigator.pop(context),
+                    InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 6,
+                                ),
+                              ]
+                          ),
+                          child: Icon(Icons.arrow_back,
+                            size: 28,
+                          ),
+                        )
                     ),
                   ],
                 ),
@@ -123,7 +141,13 @@ class _CafeScreenBarsState extends State<CafeScreenBars> {
               itemCount: widget.cafe.eatplacesB.length,
               itemBuilder: (BuildContext context, int index) {
                 EatPlace eatplace = widget.cafe.eatplacesB[index];
-                return Stack(
+                return GestureDetector(
+                    onTap: () => {
+                  if (eatplacesB[index].name == 'Кулибин Паб')  Navigator.push(context,MaterialPageRoute(builder: (_) => EatPlaceScreenBar1(),),)
+                  else if (eatplacesB[index].name == 'Зелёный кот') Navigator.push(context,MaterialPageRoute(builder: (_) => EatPlaceScreenBar2(),),)
+                  else if (eatplacesB[index].name == 'Горький бар') Navigator.push(context,MaterialPageRoute(builder: (_) => EatPlaceScreenBar3(),),)
+                },
+                  child: Stack(
                   children: <Widget>[
                     Container(margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
                       height: 190.0,
@@ -150,18 +174,6 @@ class _CafeScreenBarsState extends State<CafeScreenBars> {
                                       ),
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
-                                      ),
-                                    ),
-                                    Container(
-                                      child:IconButton(
-                                        icon: Icon(Icons.free_breakfast),
-                                        //color: Colors.black,
-                                        iconSize: 25.0,
-                                        onPressed:  () => {
-                                          if (eatplace.name == "Кулибин Паб")_launchURL
-                                         else if (eatplace.name == "Зелёный кот")_launchURL1
-                                          else if (eatplace.name == "Горький бар")_launchURL2,
-                                        },
                                       ),
                                     ),
                                   ]
@@ -217,6 +229,7 @@ class _CafeScreenBarsState extends State<CafeScreenBars> {
                       ),
                     ),
                   ],
+                  ),
                 );
               },
             ),
@@ -224,31 +237,5 @@ class _CafeScreenBarsState extends State<CafeScreenBars> {
         ],
       ),
     );
-  }
-  _launchURL() async {
-    const url = 'https://kulibinpub.ru/?ysclid=lilvdk0atm179648106';
-    if (await canLaunch (url)
-    ) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
- _launchURL1() async {
-    const url = 'https://taplink.cc/greencatbar';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-
-  }
-  _launchURL2() async {
-    const url = 'https://barhopping-krd.ru/gorkiybar';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }

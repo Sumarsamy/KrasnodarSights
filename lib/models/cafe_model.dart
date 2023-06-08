@@ -24,7 +24,6 @@ List<EatPlace>eatplacesP = [
     sredch: '1200 руб./чел',
     startTimes: ['11:00','00:00'],
     rating: 4,
-    link: 'https://katenkarest.ru/?ysclid=lilv3i5h7t404583640'
   ),
   EatPlace (
     imageUrl: 'images/tori.jpg',
@@ -33,7 +32,6 @@ List<EatPlace>eatplacesP = [
     sredch: '400 руб./чел',
     startTimes: ['11:00','23:00'],
     rating: 5,
-      link: 'https://toriramen.ru/?ysclid=lilv4dr09v596973639'
   ),
   EatPlace (
     imageUrl: 'images/ret.jpg',
@@ -42,7 +40,6 @@ List<EatPlace>eatplacesP = [
     sredch: '6000 руб./чел',
     startTimes: ['11:00','23:00'],
     rating: 5,
-      link: 'https://ryotei.ru/'
   ),
 ];
 
@@ -50,20 +47,18 @@ List<EatPlace>eatplacesC = [
   EatPlace (
     imageUrl: 'images/nahl.jpg',
     name: 'Нахлебник',
-    address: 'ул.,Рашпилевская, 106',
+    address: 'ул.Рашпилевская, 106',
     sredch: '400 руб./чел',
     startTimes: ['09:00','23:00'],
     rating: 4,
-      link: 'https://nahlebnikbar.ru/?ysclid=lilv758o6d979628884'
   ),
   EatPlace (
     imageUrl: 'images/vafh.jpg',
     name: 'ВафлиВафли',
-    address: 'ул.Красная, 159',
+    address: 'ул.Красная, 86/1',
     sredch: '300 руб./чел',
     startTimes: ['09:00','21:00'],
     rating: 3,
-      link: 'http://fr.vaflivafli.com/'
   ),
   EatPlace (
     imageUrl: 'images/uni.jpg',
@@ -72,19 +67,17 @@ List<EatPlace>eatplacesC = [
     sredch: '500 руб./чел',
     startTimes: ['10:00','23:00'],
     rating: 3,
-      link: 'http://www.unipizza.ru/zakaz.html?ysclid=lilv8ccryk422751527'
-  ),
+  )
 ];
 
 List<EatPlace>eatplacesB = [
   EatPlace (
     imageUrl: 'images/XXL.webp',
     name: 'Кулибин Паб',
-    address: 'ул.,Карасунская, 83',
+    address: 'ул.Карасунская, 83',
     sredch: '600 руб./чел',
     startTimes: ['16:00','02:00'],
     rating: 5,
-      link: 'https://kulibinpub.ru/?ysclid=lilvdk0atm179648106'
   ),
   EatPlace (
     imageUrl: 'images/zelk.webp',
@@ -93,7 +86,6 @@ List<EatPlace>eatplacesB = [
     sredch: '400 руб./чел',
     startTimes: ['11:00','01:00'],
     rating: 3,
-      link: 'https://taplink.cc/greencatbar'
   ),
   EatPlace (
     imageUrl: 'images/gor.jpg',
@@ -102,7 +94,6 @@ List<EatPlace>eatplacesB = [
     sredch: '500 руб./чел',
     startTimes: ['18:00','03:00'],
     rating: 4,
-      link: 'https://barhopping-krd.ru/gorkiybar'
   ),
 ];
 

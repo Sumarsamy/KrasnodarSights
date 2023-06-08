@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:kurs/screens/map_screen.dart';
+import 'package:kurs/screens/screens_places_theatres/screen_place_theatre1.dart';
+import 'package:kurs/screens/screens_places_theatres/screen_place_theatre2.dart';
+import 'package:kurs/screens/screens_places_theatres/screen_place_theatre3.dart';
 import '../models/destination_model.dart';
 import '../models/place_model.dart';
 import '../widgets/destination_carousel.dart';
@@ -59,27 +62,26 @@ class _DestinationScreenTheatresState extends State<DestinationScreenTheatres> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      iconSize: 30.0,
-                      color: Colors.black,
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    Row (
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.search),
-                          iconSize: 30.0,
-                          color: Colors.black,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                        IconButton(
-                          icon: Icon(FontAwesomeIcons.sortAmountDown),
-                          iconSize: 25.0,
-                          color: Colors.black,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ],
+                    InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 6,
+                                ),
+                              ]
+                          ),
+                          child: Icon(Icons.arrow_back,
+                            size: 28,
+                          ),
+                        )
                     ),
                   ],
                 ),
@@ -121,15 +123,6 @@ class _DestinationScreenTheatresState extends State<DestinationScreenTheatres> {
                   ],
                 ),
               ),
-              Positioned(
-                  right: 20.0,
-                  bottom: 20.0,
-                  child: Icon(
-                    Icons.location_on,
-                    color: Colors.white70,
-                    size: 25.0,
-                  )
-              ),
             ],
           ),
           Expanded(
@@ -138,7 +131,13 @@ class _DestinationScreenTheatresState extends State<DestinationScreenTheatres> {
               itemCount: widget.destination.placesT.length,
               itemBuilder: (BuildContext context, int index) {
                 Place place = widget.destination.placesT[index];
-                return Stack(
+                return GestureDetector(
+                    onTap: () => {
+                  if (placesT[index].name == 'Молодёжный театр')  Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenTheatre1(),),)
+                  else if (placesT[index].name == 'Музыкальный театр "Премьера"') Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenTheatre2(),),)
+                  else if (placesT[index].name == 'Кукольный театр') Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenTheatre3(),),)
+                },
+                  child: Stack(
                   children: <Widget>[
                     Container(margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
                       height: 190.0,
@@ -166,14 +165,6 @@ class _DestinationScreenTheatresState extends State<DestinationScreenTheatres> {
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
                                       ),
-                                    ),
-                                    Container(
-                                        child:IconButton(
-                                          icon: Icon(Icons.location_on),
-                                          //color: Colors.black,
-                                          iconSize: 25.0,
-                                          onPressed:() => {Navigator.push(context,MaterialPageRoute(builder: (_) => MapScreen()),),},
-                                        )
                                     ),
                                   ]
                               ),
@@ -228,6 +219,7 @@ class _DestinationScreenTheatresState extends State<DestinationScreenTheatres> {
                       ),
                     ),
                   ],
+                  ),
                 );
               },
             ),

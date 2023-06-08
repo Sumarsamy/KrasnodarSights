@@ -5,7 +5,6 @@ class EatPlace {
   List<String>startTimes;
   String sredch;
   int rating;
-  String link;
 
   EatPlace({
     required this.imageUrl,
@@ -14,6 +13,5 @@ class EatPlace {
     required this.startTimes,
     required this.sredch,
     required this.rating,
-    required this.link,
   });
 }

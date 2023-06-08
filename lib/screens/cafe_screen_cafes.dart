@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/src/widgets/container.dart';
+import 'package:kurs/screens/screens_eatplaces_cafes/screen_eatplace_cafe1.dart';
+import 'package:kurs/screens/screens_eatplaces_cafes/screen_eatplace_cafe2.dart';
+import 'package:kurs/screens/screens_eatplaces_cafes/screen_eatplace_cafe3.dart';
 import '../models/cafe_model.dart';
 import '../models/eatplace_model.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -59,11 +62,26 @@ class _CafeScreenCafesState extends State<CafeScreenCafes> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      iconSize: 30.0,
-                      color: Colors.black,
-                      onPressed: () => Navigator.pop(context),
+                    InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 6,
+                                ),
+                              ]
+                          ),
+                          child: Icon(Icons.arrow_back,
+                            size: 28,
+                          ),
+                        )
                     ),
                   ],
                 ),
@@ -122,7 +140,13 @@ class _CafeScreenCafesState extends State<CafeScreenCafes> {
               itemCount: widget.cafe.eatplacesC.length,
               itemBuilder: (BuildContext context, int index) {
                 EatPlace eatplace = widget.cafe.eatplacesC[index];
-                return Stack(
+                return GestureDetector(
+                    onTap: () => {
+                  if (eatplacesC[index].name == 'Нахлебник')  Navigator.push(context,MaterialPageRoute(builder: (_) => EatPlaceScreenCafe1(),),)
+                  else if (eatplacesC[index].name == 'ВафлиВафли') Navigator.push(context,MaterialPageRoute(builder: (_) => EatPlaceScreenCafe2(),),)
+                  else if (eatplacesC[index].name == 'Уни') Navigator.push(context,MaterialPageRoute(builder: (_) => EatPlaceScreenCafe3(),),)
+                },
+                  child: Stack(
                   children: <Widget>[
                     Container(margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
                       height: 190.0,
@@ -149,18 +173,6 @@ class _CafeScreenCafesState extends State<CafeScreenCafes> {
                                       ),
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
-                                      ),
-                                    ),
-                                    Container(
-                                      child:IconButton(
-                                        icon: Icon(Icons.free_breakfast),
-                                        //color: Colors.black,
-                                        iconSize: 25.0,
-                                        onPressed: () => {
-                                          if (eatplace.name == "Нахлебник")_launchURL,
-                                          if (eatplace.name == "ВафлиВафли")_launchURL1,
-                                          if (eatplace.name == "Уни")_launchURL2,
-                                        },
                                       ),
                                     ),
                                   ]
@@ -216,6 +228,7 @@ class _CafeScreenCafesState extends State<CafeScreenCafes> {
                       ),
                     ),
                   ],
+                  ),
                 );
               },
             ),
@@ -223,30 +236,5 @@ class _CafeScreenCafesState extends State<CafeScreenCafes> {
         ],
       ),
     );
-  }
-  _launchURL() async {
-    const url = 'https://nahlebnikbar.ru/?ysclid=lilv758o6d979628884';
-    if (await canLaunch (url)
-    ) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-  _launchURL1() async {
-    const url = 'http://fr.vaflivafli.com/';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-  _launchURL2() async {
-    const url = 'http://www.unipizza.ru/zakaz.html?ysclid=lilv8ccryk422751527';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }

@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:kurs/screens/map_screen.dart';
+import 'package:kurs/screens/screens_places_museums/place_screen_museum1.dart';
+import 'package:kurs/screens/screens_places_museums/place_screen_museum2.dart';
+import 'package:kurs/screens/screens_places_museums/place_screen_museum3.dart';
+import 'package:kurs/screens/screens_places_museums/place_screen_museum4.dart';
+import 'package:kurs/screens/screens_places_museums/place_screen_museum5.dart';
 import '../models/destination_model.dart';
 import '../models/place_model.dart';
 import '../widgets/destination_carousel.dart';
@@ -59,27 +64,26 @@ class _DestinationScreenMuseumsState extends State<DestinationScreenMuseums> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      iconSize: 30.0,
-                      color: Colors.black,
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    Row (
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.search),
-                          iconSize: 30.0,
-                          color: Colors.black,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                        IconButton(
-                          icon: Icon(FontAwesomeIcons.sortAmountDown),
-                          iconSize: 25.0,
-                          color: Colors.black,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ],
+                    InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 6,
+                                ),
+                              ]
+                          ),
+                          child: Icon(Icons.arrow_back,
+                            size: 28,
+                          ),
+                        )
                     ),
                   ],
                 ),
@@ -121,15 +125,6 @@ class _DestinationScreenMuseumsState extends State<DestinationScreenMuseums> {
                   ],
                 ),
               ),
-              Positioned(
-                  right: 20.0,
-                  bottom: 20.0,
-                  child: Icon(
-                    Icons.location_on,
-                    color: Colors.white70,
-                    size: 25.0,
-                  )
-              ),
             ],
           ),
           Expanded(
@@ -138,7 +133,15 @@ class _DestinationScreenMuseumsState extends State<DestinationScreenMuseums> {
               itemCount: widget.destination.placesMu.length,
               itemBuilder: (BuildContext context, int index) {
                 Place place = widget.destination.placesMu[index];
-                return Stack(
+                return GestureDetector(
+                    onTap: () => {
+                  if (placesMu[index].name == 'Музей-заповедник имени Е.Д.Фелицына')  Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenMuseum1(),),)
+                  else if (placesMu[index].name == 'Художественный музей имени Ф.А.Коваленко') Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenMuseum2(),),)
+                  else if (placesMu[index].name == 'Выставочный зал изобразительных искусств') Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenMuseum3(),),)
+                  else if (placesMu[index].name == 'Выставочный зал боевой славы') Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenMuseum4(),),)
+                  else if (placesMu[index].name == 'Литературный музей Кубани') Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenMuseum5(),),)
+                },
+                  child: Stack(
                   children: <Widget>[
                     Container(margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
                       height: 190.0,
@@ -166,15 +169,6 @@ class _DestinationScreenMuseumsState extends State<DestinationScreenMuseums> {
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
                                       ),
-                                    ),
-                                    Container(
-                                      //onTap: () => {if (place.name == "Собор Александра Невского")},
-                                        child:IconButton(
-                                          icon: Icon(Icons.location_on),
-                                          //color: Colors.black,
-                                          iconSize: 25.0,
-                                          onPressed:() => {Navigator.push(context,MaterialPageRoute(builder: (_) => MapScreen()),),},
-                                        )
                                     ),
                                   ]
                               ),
@@ -229,6 +223,7 @@ class _DestinationScreenMuseumsState extends State<DestinationScreenMuseums> {
                       ),
                     ),
                   ],
+                  ),
                 );
               },
             ),

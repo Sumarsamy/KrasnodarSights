@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:kurs/screens/map_screen.dart';
+import 'package:kurs/screens/screens_places_monuments/place_screen_monument1.dart';
+import 'package:kurs/screens/screens_places_monuments/place_screen_monument2.dart';
+import 'package:kurs/screens/screens_places_monuments/place_screen_monument3.dart';
+import 'package:kurs/screens/screens_places_monuments/place_screen_monument4.dart';
 import '../models/destination_model.dart';
 import '../models/place_model.dart';
 import '../widgets/destination_carousel.dart';
@@ -59,27 +63,26 @@ class _DestinationScreenMonumentsState extends State<DestinationScreenMonuments>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      iconSize: 30.0,
-                      color: Colors.black,
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    Row (
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.search),
-                          iconSize: 30.0,
-                          color: Colors.black,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                        IconButton(
-                          icon: Icon(FontAwesomeIcons.sortAmountDown),
-                          iconSize: 25.0,
-                          color: Colors.black,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ],
+                    InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 6,
+                                ),
+                              ]
+                          ),
+                          child: Icon(Icons.arrow_back,
+                            size: 28,
+                          ),
+                        )
                     ),
                   ],
                 ),
@@ -129,7 +132,14 @@ class _DestinationScreenMonumentsState extends State<DestinationScreenMonuments>
               itemCount: widget.destination.placesM.length,
               itemBuilder: (BuildContext context, int index) {
                 Place place = widget.destination.placesM[index];
-                return Stack(
+                return GestureDetector(
+                    onTap: () => {
+                  if (placesM[index].name == 'Триумфальная арка')  Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenMonument1(),),)
+                  else if (placesM[index].name == 'Памятник Екатерине II') Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenMonument2(),),)
+                  else if (placesM[index].name == 'Студенты Шурик и Лида') Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenMonument3(),),)
+                    else if (placesM[index].name == 'Кинотеатр "Аврора"') Navigator.push(context,MaterialPageRoute(builder: (_) => PlaceScreenMonument4(),),)
+                },
+                  child: Stack(
                   children: <Widget>[
                     Container(margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
                       height: 190.0,
@@ -157,14 +167,6 @@ class _DestinationScreenMonumentsState extends State<DestinationScreenMonuments>
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
                                       ),
-                                    ),
-                                    Container(
-                                        child:IconButton(
-                                          icon: Icon(Icons.location_on),
-                                          //color: Colors.black,
-                                          iconSize: 25.0,
-                                          onPressed:() => {Navigator.push(context,MaterialPageRoute(builder: (_) => MapScreen()),),},
-                                        )
                                     ),
                                   ]
                               ),
@@ -219,6 +221,7 @@ class _DestinationScreenMonumentsState extends State<DestinationScreenMonuments>
                       ),
                     ),
                   ],
+                  ),
                 );
               },
             ),
